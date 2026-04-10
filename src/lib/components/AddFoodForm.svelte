@@ -40,17 +40,21 @@
 			expiryISO
 		);
 
-		stock.add({
+		const payload: any = {
 			id: crypto.randomUUID(),
 			name,
 			category,
 			state: stateOption,
 			storageLocation,
 			enteredAt: entryISO,
-			userExpiryDate: expiryISO,
 			bestBefore,
 			notified: false
-		});
+		};
+		if (expiryISO) {
+			payload.userExpiryDate = expiryISO;
+		}
+
+		stock.add(payload);
 
 		name = '';
 		category = 'vegie';
