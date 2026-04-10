@@ -16,7 +16,7 @@ function createStockStore() {
         });
         set(items);
       }, (error: any) => {
-        console.error("[stock.ts] Firestore config error or permission denied (check Firestore Security Rules!).", error);
+        console.error("Firestore config error or permission denied (check Firestore Security Rules!).", error);
       });
     } catch(e) {
       console.warn("Firebase config is missing or invalid. Falling back to empty state.", e);

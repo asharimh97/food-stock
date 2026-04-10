@@ -4,12 +4,13 @@ importScripts('https://www.gstatic.com/firebasejs/10.10.0/firebase-messaging-com
 // REPLACE THE BELOW CONFIG WITH YOUR FIREBASE CONFIG ONCE CREATED
 // This is required for background push notifications to work.
 const firebaseConfig = {
-//   apiKey: "YOUR_API_KEY",
-//   authDomain: "YOUR_AUTH_DOMAIN",
-//   projectId: "YOUR_PROJECT_ID",
-//   storageBucket: "YOUR_STORAGE_BUCKET",
-//   messagingSenderId: "YOUR_SENDER_ID",
-//   appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyA52nm0p05WoL0dYl3037RTD_981qCgOTk",
+  authDomain: "fridge-stock-815da.firebaseapp.com",
+  projectId: "fridge-stock-815da",
+  storageBucket: "fridge-stock-815da.firebasestorage.app",
+  messagingSenderId: "835026773296",
+  appId: "1:835026773296:web:083cb55016940900b354f5",
+  measurementId: "G-1T3760STCL"
 };
 
 try {

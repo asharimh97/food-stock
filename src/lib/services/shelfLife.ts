@@ -1,5 +1,11 @@
 import type { FoodCategory, FoodState, StorageLocation } from '../models/food';
 
+const hour = 60 * 60 * 1000;
+const day = 24 * hour;
+const week = 7 * day;
+const month = 30 * day;
+const year = 365 * day;
+
 // Shelf life heuristics in days
 export function calculateBestBefore(
   enteredAt: string,
@@ -14,7 +20,7 @@ export function calculateBestBefore(
     }
     if (state === 'opened') {
       const entry = new Date(enteredAt);
-      const openedExpiry = new Date(entry.getTime() + 6 * 24 * 60 * 60 * 1000);
+      const openedExpiry = new Date(entry.getTime() + 6 * day);
       if (userExpiryDate) {
         const userProvided = new Date(userExpiryDate);
         return openedExpiry < userProvided ? openedExpiry.toISOString() : userProvided.toISOString();
