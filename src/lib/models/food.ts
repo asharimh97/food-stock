@@ -12,4 +12,6 @@ export interface FoodItem {
   userExpiryDate?: string; // ISO date string
   bestBefore: string; // ISO date string (calculated)
   notified: boolean;
+  amount?: string;
 }
+

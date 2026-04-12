@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { FoodItem } from '../models/food';
+  import { selectedFoodItem } from '../stores/dialog';
 
   let { item, onRemove }: { item: FoodItem, onRemove: (id: string) => void } = $props();
 
@@ -11,44 +12,73 @@
   });
 
   let statusColor = $derived.by(() => {
-    if (daysLeft < 0) return 'bg-rose-50 border-rose-200 text-rose-900';
-    if (daysLeft <= 1) return 'bg-orange-50 border-orange-300 text-orange-900';
-    if (daysLeft <= 3) return 'bg-amber-50 border-amber-300 text-amber-900';
-    return 'bg-emerald-50 border-emerald-200 text-emerald-900';
+    if (daysLeft < 0) return 'bg-rose-100 border-rose-200 text-rose-900';
+    if (daysLeft <= 1) return 'bg-orange-100 border-orange-300 text-orange-950';
+    if (daysLeft <= 3) return 'bg-amber-100 border-amber-300 text-amber-950';
+    return 'bg-[#7a907d] border-transparent text-white'; 
   });
 
-  let badgeColor = $derived.by(() => {
-    if (daysLeft < 0) return 'bg-rose-500 text-white';
-    if (daysLeft <= 1) return 'bg-orange-500 text-white';
-    if (daysLeft <= 3) return 'bg-amber-400 text-amber-900';
-    return 'bg-emerald-500 text-white';
-  });
+  const categoryIcon: Record<string, string> = {
+    vegie: '🥦',
+    fruit: '🍎',
+    red_meat: '🥩',
+    fish: '🐟',
+    packaged: '🥫',
+    other: '🍽️'
+  };
+
+  function handleCardClick() {
+    $selectedFoodItem = item;
+  }
 </script>
 
-<div class={`p-4 rounded-2xl border-2 flex flex-col gap-3 ${statusColor} transition-all duration-200 hover:-translate-y-1 hover:shadow-md`}>
-  <div class="flex justify-between items-start gap-4">
-    <div class="flex-1 min-w-0">
-      <h3 class="font-black text-xl tracking-tight truncate capitalize">{item.name}</h3>
-      <p class="text-sm font-medium opacity-80 mt-0.5 capitalize">{item.state} • {item.storageLocation}</p>
-    </div>
-    <div class={`px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shadow-sm ${badgeColor}`}>
+<button 
+  class={`p-4 rounded-[20px] text-left border relative flex flex-col items-start min-h-[160px] ${statusColor} transition-all duration-200 hover:-translate-y-1 hover:shadow-md w-full focus:outline-none focus:ring-2 focus:ring-slate-400`}
+  onclick={handleCardClick}
+>
+  <div class="text-[40px] mb-auto leading-none drop-shadow-sm">
+    {categoryIcon[item.category] || '🥑'}
+  </div>
+
+  <div class="mt-4 w-full pr-8">
+    <h3 class="font-bold text-[16px] leading-tight opacity-95 capitalize truncate mb-1">
+      {item.name}
+    </h3>
+    <p class="font-black text-[20px] tracking-tight leading-none mb-1 text-current gap-2 flex items-center">
       {#if daysLeft < 0}
-        Expired {Math.abs(daysLeft)}d ago
+        Expired
       {:else if daysLeft === 0}
-        Expires Today!
+        Today
       {:else if daysLeft === 1}
-        Expires Tomorrow!
+        Tomorrow
       {:else}
-        {daysLeft} days left
+        {daysLeft} days
       {/if}
-    </div>
+    </p>
+    <p class="text-[11px] font-semibold opacity-75 capitalize tracking-wide flex flex-wrap items-center gap-1">
+      {item.storageLocation} • {item.state}
+      {#if item.amount}
+        • {item.amount}
+      {/if}
+    </p>
   </div>
-  <div class="flex flex-wrap justify-between items-center mt-1 pt-3 border-t border-current/20 gap-3">
-    <span class="text-[10px] bg-white/40 px-2 py-1 rounded-md opacity-80 uppercase tracking-widest font-bold whitespace-nowrap">
-      {item.category.replace('_', ' ')}
-    </span>
-    <button aria-label="Remove item" class="ml-auto text-sm px-4 py-1.5 bg-white shadow-sm hover:scale-105 active:scale-95 rounded-lg font-bold text-current transition-transform" onclick={() => onRemove(item.id)}>
-      Consume / Toss
-    </button>
+  
+  <div 
+    role="button"
+    tabindex="0"
+    class={`absolute bottom-4 right-4 p-2.5 rounded-xl shadow-sm hover:scale-105 active:scale-95 transition-all outline-none z-10 ${
+      daysLeft > 3 ? 'bg-white/20 hover:bg-white/30 text-white' : 'bg-white/60 hover:bg-white/80 text-current'
+    }`}
+    onclick={(e) => { e.stopPropagation(); onRemove(item.id); }}
+    onkeydown={(e) => { if(e.key === 'Enter') { e.stopPropagation(); onRemove(item.id); } }}
+    aria-label="Remove item"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="opacity-90">
+      <path d="M3 6h18"/>
+      <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+      <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+      <line x1="10" x2="10" y1="11" y2="17"/>
+      <line x1="14" x2="14" y1="11" y2="17"/>
+    </svg>
   </div>
-</div>
+</button>

@@ -151,16 +151,15 @@
 				<div class="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3">
 					{#each fridgeItems as item (item.id)}
 						<div class="relative">
-							<div class="scale-95 pb-2"><FoodCard {item} onRemove={handleRemove} /></div>
-							<div
-								class="absolute -right-4 -bottom-4 -left-4 h-3 rounded-sm border-t-2 border-slate-200/60 bg-white/80 shadow-sm backdrop-blur-sm"
-							></div>
+							<div class="scale-95 pb-2">
+								<FoodCard {item} onRemove={handleRemove} />
+							</div>
 						</div>
 					{/each}
 					<div class="relative">
 						<button
 							onclick={() => onAddClick?.('chiller')}
-							class="mb-2 flex min-h-[140px] w-full scale-95 flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-slate-300 p-4 text-slate-400 transition-colors hover:border-slate-400 hover:bg-slate-100 hover:text-slate-500"
+							class="mb-2 flex h-full min-h-[140px] w-full scale-95 flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-slate-300 p-4 text-slate-400 transition-colors hover:border-slate-400 hover:bg-slate-100 hover:text-slate-500"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -175,9 +174,6 @@
 							>
 							<span class="text-sm font-bold">Add Item</span>
 						</button>
-						<div
-							class="absolute -right-4 -bottom-4 -left-4 h-3 rounded-sm border-t-2 border-slate-200/60 bg-white/80 shadow-sm backdrop-blur-sm"
-						></div>
 					</div>
 				</div>
 			{/if}

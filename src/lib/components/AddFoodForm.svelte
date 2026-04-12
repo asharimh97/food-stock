@@ -9,6 +9,7 @@
 	}: { onclose?: () => void; initialLocation?: StorageLocation } = $props();
 
 	let name = $state('');
+	let amount = $state('');
 	let category = $state<FoodCategory>('vegie');
 	let stateOption = $state<FoodState>('fresh');
 	let storageLocation = $state<StorageLocation>(initialLocation);
@@ -53,10 +54,14 @@
 		if (expiryISO) {
 			payload.userExpiryDate = expiryISO;
 		}
+		if (amount) {
+			payload.amount = amount;
+		}
 
 		stock.add(payload);
 
 		name = '';
+		amount = '';
 		category = 'vegie';
 		stateOption = 'fresh';
 		storageLocation = 'chiller';
@@ -76,18 +81,32 @@
 	></div>
 	<h2 class="text-2xl font-black tracking-tight text-slate-800">New Item</h2>
 
-	<div class="flex flex-col gap-1.5">
-		<label class="text-sm font-extrabold tracking-wide text-slate-500 uppercase" for="name"
-			>Food Name</label
-		>
-		<input
-			type="text"
-			id="name"
-			bind:value={name}
-			placeholder="e.g. Tomatoes"
-			required
-			class="relative z-10 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 font-medium transition-all outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10"
-		/>
+	<div class="grid grid-cols-[2fr_1fr] gap-4">
+		<div class="flex flex-col gap-1.5">
+			<label class="text-sm font-extrabold tracking-wide text-slate-500 uppercase" for="name"
+				>Food Name</label
+			>
+			<input
+				type="text"
+				id="name"
+				bind:value={name}
+				placeholder="e.g. Tomatoes"
+				required
+				class="relative z-10 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 font-medium transition-all outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10"
+			/>
+		</div>
+		<div class="flex flex-col gap-1.5">
+			<label class="text-sm font-extrabold tracking-wide text-slate-500 uppercase" for="amount"
+				>Amount</label
+			>
+			<input
+				type="text"
+				id="amount"
+				bind:value={amount}
+				placeholder="1 kg, 2 pcs"
+				class="relative z-10 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 font-medium transition-all outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10"
+			/>
+		</div>
 	</div>
 
 	<div class="grid grid-cols-2 gap-4">

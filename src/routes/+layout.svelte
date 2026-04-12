@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { requestNotificationPermission, checkExpiringItems } from '$lib/services/notifications';
 	import { stock } from '$lib/stores/stock';
+	import FoodDetailDialog from '$lib/components/FoodDetailDialog.svelte';
 
 	let { children } = $props();
 
@@ -28,3 +29,5 @@
 </svelte:head>
 
 {@render children()}
+<FoodDetailDialog />
+
