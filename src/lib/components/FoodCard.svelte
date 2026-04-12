@@ -33,7 +33,7 @@
 </script>
 
 <button 
-  class={`p-4 rounded-[20px] text-left border relative flex flex-col items-start min-h-[160px] ${statusColor} transition-all duration-200 hover:-translate-y-1 hover:shadow-md w-full focus:outline-none focus:ring-2 focus:ring-slate-400`}
+  class={`p-4 h-full rounded-[20px] text-left border relative flex flex-col items-start min-h-[160px] ${statusColor} transition-all duration-200 hover:-translate-y-1 hover:shadow-md w-full focus:outline-none focus:ring-2 focus:ring-slate-400`}
   onclick={handleCardClick}
 >
   <div class="text-[40px] mb-auto leading-none drop-shadow-sm">

@@ -150,16 +150,14 @@
 			{:else}
 				<div class="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3">
 					{#each fridgeItems as item (item.id)}
-						<div class="relative">
-							<div class="scale-95 pb-2">
-								<FoodCard {item} onRemove={handleRemove} />
-							</div>
+						<div class="origin-top scale-95">
+							<FoodCard {item} onRemove={handleRemove} />
 						</div>
 					{/each}
-					<div class="relative">
+					<div class="origin-top scale-95">
 						<button
 							onclick={() => onAddClick?.('chiller')}
-							class="mb-2 flex h-full min-h-[140px] w-full scale-95 flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-slate-300 p-4 text-slate-400 transition-colors hover:border-slate-400 hover:bg-slate-100 hover:text-slate-500"
+							class="flex h-full min-h-[140px] w-full flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-slate-300 p-4 text-slate-400 transition-colors hover:border-slate-400 hover:bg-slate-100 hover:text-slate-500"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
