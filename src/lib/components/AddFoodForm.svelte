@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { stock } from '../stores/stock';
 	import { calculateBestBefore } from '../services/shelfLife';
-	import type { FoodCategory, FoodState, StorageLocation } from '../models/food';
+	import type { FoodCategory, FoodItem, FoodState, StorageLocation } from '../models/food';
 
 	let {
 		onclose,
@@ -21,6 +21,7 @@
 		if (!enteredAt) {
 			enteredAt = new Date().toISOString().split('T')[0];
 		}
+		storageLocation = initialLocation;
 	});
 
 	function handleSubmit(e: Event) {
@@ -41,7 +42,7 @@
 			expiryISO
 		);
 
-		const payload: any = {
+		const payload: FoodItem = {
 			id: crypto.randomUUID(),
 			name,
 			category,

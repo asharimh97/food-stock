@@ -7,31 +7,50 @@
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
-		"prepare": "svelte-kit sync || echo ''",
+		"prepare": "husky",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "prettier --check .",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
 		"format": "prettier --write .",
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run"
+	},
+	"lint-staged": {
+		"*.{js,ts,svelte}": [
+			"eslint --fix",
+			"prettier --write"
+		],
+		"*.{json,md,css,html}": [
+			"prettier --write"
+		]
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^7.0.1",
 		"@sveltejs/kit": "^2.57.0",
 		"@sveltejs/vite-plugin-svelte": "^7.0.0",
 		"@tailwindcss/vite": "^4.2.2",
+		"eslint": "^10.2.0",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-svelte": "^3.17.0",
+		"globals": "^17.5.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.4.0",
 		"prettier": "^3.8.1",
 		"prettier-plugin-svelte": "^3.5.1",
 		"prettier-plugin-tailwindcss": "^0.7.2",
 		"svelte": "^5.55.2",
 		"svelte-check": "^4.4.6",
+		"svelte-eslint-parser": "^1.6.0",
 		"tailwindcss": "^4.2.2",
 		"typescript": "^6.0.2",
+		"typescript-eslint": "^8.58.1",
 		"vite": "^8.0.7",
 		"vite-plugin-pwa": "^1.2.0",
 		"vitest": "^4.1.3"
 	},
 	"dependencies": {
-		"firebase": "^12.12.0"
+		"firebase": "^12.12.0",
+		"tailwind-merge": "^3.5.0"
 	}
 }

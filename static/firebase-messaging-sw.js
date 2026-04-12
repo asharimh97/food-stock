@@ -30,6 +30,6 @@ try {
       self.registration.showNotification(notificationTitle, notificationOptions);
     });
   }
-} catch(e) {
+} catch {
   // Config completely missing or Firebase error
 }

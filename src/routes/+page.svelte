@@ -86,7 +86,7 @@
 			>
 				<!-- Tabs -->
 				<div class="no-scrollbar mb-2 flex flex-nowrap gap-2 overflow-x-auto pb-4">
-					{#each tabs as tab}
+					{#each tabs as tab (tab)}
 						<button
 							onclick={() => setTab(tab)}
 							class="rounded-xl border-2 px-5 py-2.5 text-[13px] font-bold tracking-wider whitespace-nowrap uppercase transition-all {activeTab ===

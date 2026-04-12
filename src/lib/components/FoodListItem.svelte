@@ -1,11 +1,12 @@
 <script lang="ts">
+	import { SvelteDate } from 'svelte/reactivity';
 	import type { FoodItem } from '../models/food';
 
 	let { item, onRemove }: { item: FoodItem; onRemove: (id: string) => void } = $props();
 
 	let daysLeft = $derived.by(() => {
-		const end = new Date(item.bestBefore);
-		const start = new Date();
+		const end = new SvelteDate(item.bestBefore);
+		const start = new SvelteDate();
 		start.setHours(0, 0, 0, 0);
 		return Math.ceil((end.getTime() - start.getTime()) / (1000 * 3600 * 24));
 	});
