@@ -44,4 +44,15 @@ describe('Shelf Life Logic', () => {
 		);
 		expect(new Date(bestBefore).toISOString().startsWith('2024-01-05')).toBe(true);
 	});
+
+	it('uses user expiry for non-packaged food if provided', () => {
+		const bestBefore = calculateBestBefore(
+			'2024-01-01T00:00:00.000Z',
+			'red_meat',
+			'fresh',
+			'chiller',
+			'2024-01-10T00:00:00.000Z'
+		);
+		expect(bestBefore).toBe('2024-01-10T00:00:00.000Z');
+	});
 });

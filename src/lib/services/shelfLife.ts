@@ -30,6 +30,11 @@ export function calculateBestBefore(
 		if (userExpiryDate) return userExpiryDate;
 	}
 
+	// If it's non-packaged food and userExpiryDate is provided, use it
+	if (userExpiryDate) {
+		return new Date(userExpiryDate).toISOString();
+	}
+
 	// Treat fresh in freezer as frozen, frozen in chiller/shelf as fresh
 	const effectiveState = location === 'freezer' ? 'frozen' : 'fresh';
 

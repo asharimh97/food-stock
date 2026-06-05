@@ -196,6 +196,22 @@
 				class="cursor-pointer rounded-xl border border-indigo-200/60 bg-white px-4 py-2 text-sm font-medium transition-all outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10"
 			/>
 		</div>
+	{:else}
+		<div class="mt-1 flex flex-col gap-2 rounded-xl border border-slate-500/10 bg-slate-500/5 p-4">
+			<div class="flex items-center justify-between">
+				<label
+					class="text-[11px] font-extrabold tracking-wider text-slate-600 uppercase"
+					for="expiryDate">Expiration Date</label
+				>
+				<span class="text-[10px] font-bold text-slate-400 uppercase">Optional</span>
+			</div>
+			<input
+				type="date"
+				id="expiryDate"
+				bind:value={userExpiryDate}
+				class="cursor-pointer rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-medium transition-all outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10"
+			/>
+		</div>
 	{/if}
 
 	<button
